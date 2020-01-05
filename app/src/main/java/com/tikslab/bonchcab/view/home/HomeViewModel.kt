@@ -3,14 +3,11 @@ package com.tikslab.bonchcab.view.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tikslab.bonchcab.model.RestService
 import com.tikslab.bonchcab.model.pojo.Table
-import com.tikslab.bonchcab.presenter.RaspPresenter
+import com.tikslab.bonchcab.presenter.TablePresenter
 
 class HomeViewModel : ViewModel() {
 
-    private val presenter = RaspPresenter()
-    private var numOfWeek = 17
     private var _table = MutableLiveData<Table>()
     val text: LiveData<Table> = _table
 
@@ -20,16 +17,11 @@ class HomeViewModel : ViewModel() {
     }
 
     fun prevWeek() {
-        numOfWeek--
-        getAdapterDataWithWeek()
+        TablePresenter.loadPrevWeek()
     }
 
     fun nextWeek() {
-        numOfWeek++
-        getAdapterDataWithWeek()
+        TablePresenter.loadNextWeek()
     }
 
-    fun getAdapterDataWithWeek() {
-        RestService.getRaspWithWeek(numOfWeek, this)
-    }
 }
