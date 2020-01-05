@@ -52,30 +52,5 @@ class HomeFragment : Fragment() {
             layoutManager = manager
         }
 
-        tableView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            var isScrolling = false
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                if (manager.findFirstVisibleItemPosition() <= 1 && isScrolling && dy < 0) {
-                    TablePresenter.scrollLoad(false)
-                    Log.d("Recycler onScrolled", "Event prev. Week")
-                }
-
-                if (manager.findLastVisibleItemPosition() >= tableAdapter.itemCount - 1 && isScrolling && dy > 0) {
-                    TablePresenter.scrollLoad(true)
-                    Log.d("Recycler onScrolled", "Event next. Week")
-
-                }
-            }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                isScrolling = newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL
-            }
-
-        })
     }
 }

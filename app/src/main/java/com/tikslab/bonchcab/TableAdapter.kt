@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.tikslab.bonchcab.model.pojo.DayOfWeek
 import com.tikslab.bonchcab.model.pojo.Lesson
 import com.tikslab.bonchcab.model.pojo.Table
 import com.tikslab.bonchcab.presenter.TablePresenter
@@ -17,10 +18,11 @@ class TableAdapter : RecyclerView.Adapter<TableAdapter.TableHolder>() {
 
     inner class TableHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val weekView = itemView.weekView
+        val textView = itemView.dayTextView
     }
 
     override fun getItemCount(): Int {
-        return TablePresenter.tables.size
+        return TablePresenter.tables.lessons.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TableHolder {
@@ -32,15 +34,13 @@ class TableAdapter : RecyclerView.Adapter<TableAdapter.TableHolder>() {
 
     override fun onBindViewHolder(holder: TableHolder, position: Int) {
 
-        holder.weekView.adapter = ArrayAdapter<Table>(
-            context, R.layout.week_item,
-            TablePresenter.tables
+        holder.weekView.adapter = ArrayAdapter<Lesson>(
+            context, android.R.layout.simple_list_item_1,
+            TablePresenter.tables.lessons[DayOfWeek.values()[position]]!!
         )
-        holder.itemView.weekView.adapter = ArrayAdapter<Lesson>(
-            context, R.layout.lesson_item,
-            R.id.textView,
-            TablePresenter.getLessons(position)
-
-        )
+        holder.textView.text = DayOfWeek.values()[position].toString()
+//        holder.weekView.layoutParams.height =
+//            holder.weekView.count * holder.weekView.adapter.getView(0, null, holder.weekView).height
+        holder.weekView.layoutParams.height = holder.weekView.count * 140
     }
 }
