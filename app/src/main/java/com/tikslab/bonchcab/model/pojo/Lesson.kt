@@ -19,4 +19,9 @@ data class Lesson(
     @SerializedName("num")
     @Expose
     val num: String
-)
+) {
+
+    override fun toString(): String {
+        return "$num  $name"
+    }
+}
