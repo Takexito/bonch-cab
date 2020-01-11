@@ -9,45 +9,61 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tikslab.bonchcab.R
-import com.tikslab.bonchcab.view.TableAdapter
 import com.tikslab.bonchcab.presenter.TablePresenter
+import com.tikslab.bonchcab.view.TableAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        homeViewModel.text.observe(this, Observer {
-        })
-        return root
+        TablePresenter.init(this)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        prevButton.setOnClickListener {
-            homeViewModel.prevWeek()
-        }
 
-        nextButton.setOnClickListener {
-            homeViewModel.nextWeek()
-        }
+        createTableView()
+        TablePresenter.onStart()
 
+        prevButton.setOnClickListener { TablePresenter.onPrevWeek() }
+        nextButton.setOnClickListener { TablePresenter.onNextWeek() }
+        updateWeek()
+
+    }
+
+    private fun createTableView() {
         val tableAdapter = TableAdapter()
-        TablePresenter.adapter = tableAdapter
-        val manager = LinearLayoutManager(this.context)
+        val manager = LinearLayoutManager(context)
 
         tableView.apply {
             adapter = tableAdapter
             layoutManager = manager
         }
+    }
 
+    fun updateWeek(){
+        prevButton.text = (TablePresenter.currWeek - 1).toString()
+        nextButton.text = (TablePresenter.currWeek + 1).toString()
+        weekNumText.text = TablePresenter.currWeek.toString()
+        tableView.adapter?.notifyDataSetChanged()
+
+
+    }
+
+    fun showProgressBar(){
+        progressBar.visibility = View.VISIBLE
+        tableView.visibility = View.GONE
+    }
+
+    fun hideProgressBar(){
+        progressBar.visibility = View.GONE
+        tableView.visibility = View.VISIBLE
     }
 }
