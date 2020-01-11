@@ -4,8 +4,8 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-data class Table(
+data class WeekTable(
     @SerializedName("days")
     @Expose
-    val lessons: Map<DayOfWeek, ArrayList<Lesson>>
+    val days: Map<DayOfWeek, ArrayList<Lesson>>
 )
