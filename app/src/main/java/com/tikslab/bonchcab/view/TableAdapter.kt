@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tikslab.bonchcab.R
 import com.tikslab.bonchcab.model.Util
 import com.tikslab.bonchcab.model.pojo.DayOfWeek
-import com.tikslab.bonchcab.model.pojo.Lesson
 import com.tikslab.bonchcab.presenter.TablePresenter
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.table_item.view.*
 
 class TableAdapter : RecyclerView.Adapter<TableAdapter.TableHolder>() {

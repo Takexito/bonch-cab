@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 object NetworkService {
 
     val raspApi: RaspJsonApi
-    val mRetrofit: Retrofit
+    private val mRetrofit: Retrofit
 
     init{
         val okHttpClient = OkHttpClient.Builder()

@@ -17,18 +17,18 @@ object TablePresenter {
     private fun loadNextWeek() {
         currWeek++
         view.showProgressBar()
-        RestService.getRaspWithWeek(currWeek)
+        RestService.getRaspWithWeek(currWeek, AuthPresenter.email, AuthPresenter.pass)
     }
 
     private fun loadCurrWeek() {
         view.showProgressBar()
-        RestService.getRaspWithWeek(currWeek)
+        RestService.getRaspWithWeek(currWeek, AuthPresenter.email, AuthPresenter.pass)
     }
 
     private fun loadPrevWeek() {
         currWeek--
         view.showProgressBar()
-        RestService.getRaspWithWeek(currWeek)
+        RestService.getRaspWithWeek(currWeek, AuthPresenter.email, AuthPresenter.pass)
     }
 
     fun updateTable(table: WeekTable) {
