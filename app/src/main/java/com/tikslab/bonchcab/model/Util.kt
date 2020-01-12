@@ -29,4 +29,12 @@ object Util {
     fun getNoLessons(): Lesson {
         return Lesson("Занятий нет", "", "", "", "")
     }
+
+    fun getCurrDay(): DayOfWeek{
+        val now = Calendar.getInstance()
+        now.set(2020, 0, 10)
+        val day = if(now.get(Calendar.DAY_OF_WEEK) == 1) 6
+        else now.get(Calendar.DAY_OF_WEEK) - 2
+        return DayOfWeek.values()[day]
+    }
 }

@@ -2,6 +2,7 @@ package com.tikslab.bonchcab.presenter
 
 import com.tikslab.bonchcab.model.RestService
 import com.tikslab.bonchcab.model.Util
+import com.tikslab.bonchcab.model.pojo.DayOfWeek
 import com.tikslab.bonchcab.model.pojo.WeekTable
 import com.tikslab.bonchcab.view.home.HomeFragment
 
@@ -52,7 +53,10 @@ object TablePresenter {
     fun onStart() {
         loadCurrWeek()
         view.updateWeek()
+    }
 
+    fun getCurrDayOfWeek(): DayOfWeek {
+        return Util.getCurrDay()
     }
 
 

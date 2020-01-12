@@ -34,10 +34,15 @@ class TableAdapter : RecyclerView.Adapter<TableAdapter.TableHolder>() {
 
     override fun onBindViewHolder(holder: TableHolder, position: Int) {
 
+        holder.itemView.setBackgroundResource(R.color.colorPrimary)
+
         val day = DayOfWeek.values()[position]
 
         val days = TablePresenter.weekTable.days
         if (days[day]!!.isEmpty()) days[day]!!.add(Util.getNoLessons())
+
+        if (day == TablePresenter.getCurrDayOfWeek())
+            holder.itemView.setBackgroundResource(R.color.colorPrimaryDark)
 
         holder.weekView.layoutManager = LinearLayoutManager(context)
         holder.weekView.adapter = DayAdapter(day)
