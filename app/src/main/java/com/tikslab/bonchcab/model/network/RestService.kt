@@ -1,5 +1,6 @@
-package com.tikslab.bonchcab.model
+package com.tikslab.bonchcab.model.network
 
+import com.tikslab.bonchcab.model.Util
 import com.tikslab.bonchcab.model.pojo.WeekTable
 import com.tikslab.bonchcab.presenter.AuthPresenter
 import com.tikslab.bonchcab.presenter.TablePresenter
@@ -8,26 +9,30 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object RestService {
-    var response: WeekTable? = null
     fun getRaspWithWeek(num: Int, email: String, pass: String) {
         NetworkService
-            .raspApi
+            .TABLE_API
             .getRaspWithNum(num, email, pass)
             .enqueue(object : Callback<WeekTable> {
                 override fun onResponse(call: Call<WeekTable>, resp: Response<WeekTable>) {
-                    TablePresenter.updateTable(resp.body()!!)
+                    TablePresenter.updateTable(
+                        resp.body() ?: Util.getErrorTable("Занятий не найдено")
+                    )
                 }
 
                 override fun onFailure(call: Call<WeekTable>, t: Throwable) {
-                    TablePresenter.updateTable(Util.getErrorTable(t.localizedMessage!!))
+                    TablePresenter.updateTable(
+                        Util.getErrorTable(
+                            t.localizedMessage!!
+                        )
+                    )
                 }
             })
-        //return response!!
     }
 
     fun auth(email: String, pass: String) {
         NetworkService
-            .raspApi
+            .TABLE_API
             .logIn(email, pass)
             .enqueue(object : Callback<Void> {
                 override fun onFailure(call: Call<Void>, t: Throwable) {

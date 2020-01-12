@@ -1,4 +1,4 @@
-package com.tikslab.bonchcab.view
+package com.tikslab.bonchcab.view.timetable
 
 import android.content.Context
 import android.view.LayoutInflater

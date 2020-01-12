@@ -1,4 +1,4 @@
-package com.tikslab.bonchcab.view
+package com.tikslab.bonchcab.view.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tikslab.bonchcab.R
 import com.tikslab.bonchcab.presenter.AuthPresenter
-import kotlinx.android.synthetic.main.fragment_log_in.*
+import kotlinx.android.synthetic.main.fragment_auth.*
 
 
 class AuthFragment : Fragment() {
@@ -18,8 +18,7 @@ class AuthFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         AuthPresenter.init(this)
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_log_in, container, false)
+        return inflater.inflate(R.layout.fragment_auth, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,8 +42,4 @@ class AuthFragment : Fragment() {
 
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = AuthFragment()
-    }
 }

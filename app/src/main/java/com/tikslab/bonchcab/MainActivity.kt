@@ -23,18 +23,18 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications,
+                R.id.navigation_table,
+                R.id.navigation_grading,
+                R.id.navigation_settings,
                 R.id.navigation_auth
             )
         )
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.navigation_home -> showBottomNav()
-                R.id.navigation_dashboard -> showBottomNav()
-                R.id.navigation_notifications -> showBottomNav()
+                R.id.navigation_table -> showBottomNav()
+                R.id.navigation_grading -> showBottomNav()
+                R.id.navigation_settings -> showBottomNav()
                 else -> hideBottomNav()
             }
         }
@@ -45,6 +45,10 @@ class MainActivity : AppCompatActivity() {
 
     fun navigateToHomeFragment() {
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_logIn_to_navigation_home)
+    }
+
+    fun navigateToAuthFragment() {
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_log_out)
     }
 
     private fun showBottomNav() {

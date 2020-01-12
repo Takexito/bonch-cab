@@ -1,4 +1,4 @@
-package com.tikslab.bonchcab.view
+package com.tikslab.bonchcab.view.timetable
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -42,7 +42,7 @@ class TableAdapter : RecyclerView.Adapter<TableAdapter.TableHolder>() {
         if (days[day]!!.isEmpty()) days[day]!!.add(Util.getNoLessons())
 
         if (day == TablePresenter.getCurrDayOfWeek())
-            holder.itemView.setBackgroundResource(R.color.colorPrimaryDark)
+            holder.itemView.setBackgroundResource(R.color.colorAccent)
 
         holder.weekView.layoutManager = LinearLayoutManager(context)
         holder.weekView.adapter = DayAdapter(day)

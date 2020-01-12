@@ -1,20 +1,16 @@
-package com.tikslab.bonchcab.view.home
+package com.tikslab.bonchcab.view.timetable
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tikslab.bonchcab.R
 import com.tikslab.bonchcab.presenter.TablePresenter
-import com.tikslab.bonchcab.view.TableAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_table.*
 
-class HomeFragment : Fragment() {
+class TimeTableFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -23,7 +19,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         TablePresenter.init(this)
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_table, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,10 +45,10 @@ class HomeFragment : Fragment() {
     }
 
     fun updateWeek(){
-        prevButton.text = (TablePresenter.currWeek - 1).toString()
-        nextButton.text = (TablePresenter.currWeek + 1).toString()
-        weekNumText.text = TablePresenter.currWeek.toString()
-        tableView.adapter?.notifyDataSetChanged()
+        prevButton?.text = (TablePresenter.currWeek - 1).toString()
+        nextButton?.text = (TablePresenter.currWeek + 1).toString()
+        weekNumText?.text = TablePresenter.currWeek.toString()
+        tableView?.adapter?.notifyDataSetChanged()
 
 
     }
@@ -63,7 +59,7 @@ class HomeFragment : Fragment() {
     }
 
     fun hideProgressBar(){
-        progressBar.visibility = View.GONE
-        tableView.visibility = View.VISIBLE
+        progressBar?.visibility = View.GONE
+        tableView?.visibility = View.VISIBLE
     }
 }

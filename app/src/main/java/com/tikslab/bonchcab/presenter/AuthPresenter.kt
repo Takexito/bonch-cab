@@ -5,17 +5,19 @@ import android.content.SharedPreferences
 import android.widget.Toast
 import com.tikslab.bonchcab.MainActivity
 import com.tikslab.bonchcab.R
-import com.tikslab.bonchcab.model.RestService
-import com.tikslab.bonchcab.view.AuthFragment
+import com.tikslab.bonchcab.model.network.RestService
+import com.tikslab.bonchcab.view.auth.AuthFragment
 
 object AuthPresenter {
 
     var email = ""
     var pass = ""
     lateinit var view: AuthFragment
+    lateinit var preferences: SharedPreferences
 
     fun init(view: AuthFragment) {
         this.view = view
+        preferences = this.view.activity!!.getPreferences(Context.MODE_PRIVATE)
     }
 
     fun authError(): String {
@@ -26,7 +28,7 @@ object AuthPresenter {
     }
 
     fun authSuccess() {
-        saveAuthData(view.activity!!.getPreferences(Context.MODE_PRIVATE))
+        saveAuthData(preferences)
         (view.requireActivity() as MainActivity).navigateToHomeFragment()
     }
 
@@ -36,8 +38,15 @@ object AuthPresenter {
         RestService.auth(email, pass)
     }
 
+    fun onLogOutButton() {
+        deleteAuthData(preferences)
+        email = ""
+        pass = ""
+    }
+
     fun isAutoAuth(): Boolean {
-        val isSuccess = loadAuthData(view.activity!!.getPreferences(Context.MODE_PRIVATE))
+
+        val isSuccess = loadAuthData(preferences)
         RestService.auth(email, pass)
         return isSuccess
     }
@@ -61,5 +70,9 @@ object AuthPresenter {
         email = preferences.getString(R.string.email_key.toString(), "")!!
         pass = preferences.getString(R.string.pass_key.toString(), "")!!
         return true
+    }
+
+    private fun deleteAuthData(preferences: SharedPreferences) {
+        preferences.edit().clear().apply()
     }
 }

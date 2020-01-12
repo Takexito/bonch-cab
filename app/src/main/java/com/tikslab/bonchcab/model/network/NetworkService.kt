@@ -1,5 +1,6 @@
-package com.tikslab.bonchcab.model
+package com.tikslab.bonchcab.model.network
 
+import com.tikslab.bonchcab.model.network.api.TableJsonApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -8,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 object NetworkService {
 
-    val raspApi: RaspJsonApi
+    val TABLE_API: TableJsonApi
     private val mRetrofit: Retrofit
 
     init{
@@ -23,6 +24,7 @@ object NetworkService {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        raspApi = mRetrofit.create(RaspJsonApi::class.java)
+        TABLE_API = mRetrofit.create(
+            TableJsonApi::class.java)
     }
 }

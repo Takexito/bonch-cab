@@ -1,4 +1,4 @@
-package com.tikslab.bonchcab.view.dashboard
+package com.tikslab.bonchcab.view.grading
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tikslab.bonchcab.R
 
-class DashboardFragment : Fragment() {
+class GradingFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var gradingViewModel: GradingViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        gradingViewModel =
+            ViewModelProviders.of(this).get(GradingViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_grading, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(this, Observer {
+        gradingViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

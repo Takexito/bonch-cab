@@ -1,13 +1,13 @@
-package com.tikslab.bonchcab.view.dashboard
+package com.tikslab.bonchcab.view.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class SettingsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "Настройки. В разработке."
     }
     val text: LiveData<String> = _text
 }

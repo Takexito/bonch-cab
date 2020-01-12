@@ -1,13 +1,13 @@
-package com.tikslab.bonchcab.view.notifications
+package com.tikslab.bonchcab.view.grading
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class GradingViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "Зачетка. В разработке."
     }
     val text: LiveData<String> = _text
 }

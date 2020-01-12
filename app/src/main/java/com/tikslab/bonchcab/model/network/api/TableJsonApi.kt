@@ -1,4 +1,4 @@
-package com.tikslab.bonchcab.model
+package com.tikslab.bonchcab.model.network.api
 
 import com.tikslab.bonchcab.model.pojo.WeekTable
 import retrofit2.Call
@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-interface RaspJsonApi {
+interface TableJsonApi {
     @GET("/rasp")
     fun getRaspWithNum(
         @Query("week") num: Int,
