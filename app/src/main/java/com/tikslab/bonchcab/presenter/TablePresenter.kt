@@ -1,26 +1,16 @@
 package com.tikslab.bonchcab.presenter
 
 import com.tikslab.bonchcab.model.RestService
-import com.tikslab.bonchcab.model.pojo.DayOfWeek
-import com.tikslab.bonchcab.model.pojo.Lesson
+import com.tikslab.bonchcab.model.Util
 import com.tikslab.bonchcab.model.pojo.WeekTable
-import com.tikslab.bonchcab.view.TableAdapter
 import com.tikslab.bonchcab.view.home.HomeFragment
-import kotlinx.android.synthetic.main.fragment_home.*
 
 object TablePresenter {
     lateinit var view: HomeFragment
-    var currWeek = 17
-    var weekTable = WeekTable(
-        mapOf(
-            Pair(
-                DayOfWeek.MONDAY,
-                arrayListOf(Lesson("Load", "", "", "", ""))
-            )
-        )
-    )
+    var currWeek = Util.getWeek()
+    var weekTable = Util.getErrorTable("Load")
 
-    fun init(view: HomeFragment){
+    fun init(view: HomeFragment) {
         this.view = view
     }
 
@@ -30,7 +20,7 @@ object TablePresenter {
         RestService.getRaspWithWeek(currWeek)
     }
 
-    private fun loadCurrWeek(){
+    private fun loadCurrWeek() {
         view.showProgressBar()
         RestService.getRaspWithWeek(currWeek)
     }
@@ -59,7 +49,7 @@ object TablePresenter {
 
     }
 
-    fun onStart(){
+    fun onStart() {
         loadCurrWeek()
         view.updateWeek()
 

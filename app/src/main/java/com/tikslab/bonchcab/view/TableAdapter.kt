@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tikslab.bonchcab.R
+import com.tikslab.bonchcab.model.Util
 import com.tikslab.bonchcab.model.pojo.DayOfWeek
 import com.tikslab.bonchcab.model.pojo.Lesson
 import com.tikslab.bonchcab.presenter.TablePresenter
@@ -38,9 +39,7 @@ class TableAdapter : RecyclerView.Adapter<TableAdapter.TableHolder>() {
         val day = DayOfWeek.values()[position]
 
         val days = TablePresenter.weekTable.days
-        if (days[day]!!.isEmpty()) days[day]!!.add(
-            Lesson("Занятий нет", "", "", "", "")
-        )
+        if (days[day]!!.isEmpty()) days[day]!!.add(Util.getNoLessons())
 
         holder.weekView.layoutManager = LinearLayoutManager(context)
         holder.weekView.adapter = DayAdapter(day)
